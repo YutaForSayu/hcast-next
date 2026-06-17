@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-display: 'Syne', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #0a0a0f;
+  color: #f0f0f5;
+  font-family: var(--font-body);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #111118;
+}
+::-webkit-scrollbar-thumb {
+  background: #2a2a3a;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3a3a4e;
+}
+
+/* Selection */
+::selection {
+  background: rgba(230, 57, 70, 0.3);
+  color: #f0f0f5;
+}
+
+@layer components {
+  .hcast-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .badge {
+    @apply inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold uppercase tracking-wider;
+  }
+
+  .badge-manhwa { @apply bg-purple-500/20 text-purple-300 border border-purple-500/30; }
+  .badge-manhua { @apply bg-blue-500/20 text-blue-300 border border-blue-500/30; }
+  .badge-manga { @apply bg-orange-500/20 text-orange-300 border border-orange-500/30; }
+  .badge-webtoon { @apply bg-green-500/20 text-green-300 border border-green-500/30; }
+  .badge-hot { @apply bg-red-500/20 text-red-400 border border-red-500/30; }
+  .badge-ongoing { @apply bg-emerald-500/20 text-emerald-400 border border-emerald-500/30; }
+  .badge-completed { @apply bg-sky-500/20 text-sky-400 border border-sky-500/30; }
+  .badge-hiatus { @apply bg-yellow-500/20 text-yellow-400 border border-yellow-500/30; }
+  .badge-cancelled { @apply bg-red-900/30 text-red-400/80 border border-red-800/30; }
+  .badge-project { @apply bg-violet-500/20 text-violet-300 border border-violet-500/30; }
+
+  .card-hover {
+    @apply transition-all duration-300 hover:scale-[1.02] hover:shadow-card-hover;
+  }
+
+  .btn-primary {
+    @apply bg-accent hover:bg-accent-hover text-white font-semibold px-4 py-2 rounded-lg transition-all duration-200 flex items-center gap-2;
+  }
+
+  .btn-secondary {
+    @apply bg-bg-elevated hover:bg-bg-tertiary border border-border-light text-text-primary font-medium px-4 py-2 rounded-lg transition-all duration-200 flex items-center gap-2;
+  }
+
+  .section-title {
+    @apply font-display text-lg font-bold text-text-primary flex items-center gap-2 mb-4;
+  }
+
+  .input-field {
+    @apply bg-bg-tertiary border border-border rounded-lg px-4 py-2.5 text-text-primary placeholder:text-text-muted focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent/30 transition-all duration-200 w-full;
+  }
+
+  .skeleton {
+    @apply bg-bg-tertiary rounded animate-pulse;
+    background: linear-gradient(90deg, #1a1a24 25%, #22222e 50%, #1a1a24 75%);
+    background-size: 1000px 100%;
+    animation: shimmer 2s infinite;
+  }
+}
+
+/* Shimmer animation */
+@keyframes shimmer {
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+}
+
+/* Custom scrollable row */
+.scroll-row {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scroll-row::-webkit-scrollbar { display: none; }
+
+/* Chapter image lazy load fade */
+.chapter-img {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.chapter-img.loaded {
+  opacity: 1;
+}
